@@ -4,13 +4,10 @@ const OrderSchema = new mongoose.Schema(
   {
     nombre: {
       type: String,
-    },
-    descripcion: {
-        type: String,
-      }
+    }
   }
 );
 
-const Order = mongoose.model("Orders", OrderSchema);
+const Order = mongoose.model("Ordenes", OrderSchema);
 
 export default Order;
