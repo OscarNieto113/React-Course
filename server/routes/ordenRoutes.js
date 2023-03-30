@@ -1,11 +1,11 @@
 import express from "express";
-import { postOrden, /*deleteOrden, updateOrden,*/ getOrden } from "../controllers/ordenController.js";
+import { ordenController } from "../controllers/ordenController.js";
 
 const router = express.Router();
 
-router.get("/", getOrden);
-//router.delete("/orden/:id", deleteOrden);
-router.post("/postOrden", postOrden);
-//router.put("/updateOrden/:idOrden", updateOrden);
+router.get("/", ordenController.findAll.bind(ordenController));
+router.delete("/radiante/:id", ordenController.deleteById.bind(ordenController));
+router.post("/postRadiante", ordenController.create.bind(ordenController));
+router.put("/updateRadiante/:idRadiante", ordenController.updateById.bind(ordenController));
 
 export default router;
