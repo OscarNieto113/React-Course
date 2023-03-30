@@ -12,11 +12,11 @@ const RadiantSchema = new mongoose.Schema(
       type: String
     },
     orden: {
-      type: Schema.Types.ObjectId, ref: "ordenes"
+      type: Schema.Types.ObjectId, ref: "Ordenes"
     }
   }
 );
 
-const Order = mongoose.model("Radiantes", RadiantSchema);
+const Radiante = mongoose.model("Radiantes", RadiantSchema);
 
-export default Order;
+export default Radiante;
