@@ -34,4 +34,47 @@ export const postRadiante = async (req, res) => {
   } catch (err) {
     res.status(404).send({ message: err.message });
   }
-}
+};
+
+export const deleteRadiante = async (req, res) => {
+  try {
+      const { id } = req.params;
+      const _id = new mongoose.Types.ObjectId(id);
+      await Radiante.deleteOne({ _id: _id });
+      //const radiantes= await Radiante.find().populate("orden");
+      res.status(200).json(_id);
+     
+  }
+  catch (err) {
+      res.status(404).send({ message: err.message })
+  }
+};
+
+export const updateRadiante = async (req, res) => {
+  try {
+    const { newNombreRadiante, nameOrden, newDescripcion } = req.body;
+    const { idRadiante } = req.params;
+    
+    const ID = new mongoose.Types.ObjectId(idRadiante);
+    const orden = await Orden.findOne({ nombre: nameOrden });
+    const radiante = await Radiante.findOne({ _id: ID });
+    
+    radiante.nombre = newNombreRadiante;
+    radiante.descripcion = newDescripcion;
+    
+    if (req.file) {
+      const { filename } = req.file
+      platillo.imageUrl = filename;
+    }
+    
+    radiante.orden = orden._id;
+    
+    await radiante.save();
+
+    const radiantes = await Radiante.find().populate("ordenes")
+
+    res.status(201).send(radiantes);
+  } catch (err) {
+    res.status(404).send({ message: err.message });
+  }
+};
