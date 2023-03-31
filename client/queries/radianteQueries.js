@@ -39,29 +39,29 @@ export const findAllRadiante = async () => {
     }
 }
 
-/*
-export const deletePlatillos = async (id) => {
+
+export const deleteByIdRadiante = async (id) => {
   try {
-      const platillos = await axios.delete(`${baseURL}/platillos/platillo/${id}`);
-      return platillos.data;
+      const radiantes = await axios.delete(`${baseURL}/radiante/radiante/${id}`);
+      return radiantes.data;
   } catch (err) {
       console.log(err.message);
   }
 }
 
-export const updatePlatillo = async (data, idPlatillo) => {
-  const { newNameComida, description, nameRestaurante, urlImg} = data
+export const updateByIdRadiante = async (data, idPlatillo) => {
+  const { updateNombreRadiante, updateDescripcionRadiante, updateNombreOrden, updateUrlImg} = data
   
   const formData = new FormData();
 
-  formData.append('newNameComida', newNameComida)
-  formData.append('description', description)
-  formData.append('nameRestaurante', nameRestaurante)
-  formData.append('urlImg', urlImg[0])
+  formData.append('updateNombreRadiante', updateNombreRadiante)
+  formData.append('updateDescripcionRadiante', updateDescripcionRadiante)
+  formData.append('updateNombreOrden', updateNombreOrden)
+  formData.append('updateUrlImg', updateUrlImg[0])
 
   try {
     const response = await axios({
-      url: `${baseURL}/platillos/updatePlatillo/${idPlatillo}`,
+      url: `${baseURL}/radiante/updateRadiante/${idRadiante}`,
       method: "PUT",
       data: formData,
       headers: { "Content-Type": "multipart/form-data" }
@@ -72,4 +72,3 @@ export const updatePlatillo = async (data, idPlatillo) => {
     console.log(err.message)
   }
 }
-*/
