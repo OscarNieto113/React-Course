@@ -18,7 +18,7 @@ export const createOrden = async (data) => {
   }
 }
 
-export const findAll = async () => {
+export const findAllOrden = async () => {
     try {
         const ordenes = await axios.get(`${baseURL}/orden/`);
         return ordenes.data;
