@@ -10,7 +10,13 @@ class BaseController {
   async create(req, res) {
     try {
       const item = await this.model.create(req.body);
-      res.status(200).json(item);
+      if (this.populateTable != '') {
+        const items = await this.model.find().populate(this.populateTable);
+        res.status(200).json(items);
+      }else{
+        const items = await this.model.find();
+        res.status(200).json(items);
+      }
     } catch (err) {
         res.status(404).send({ message: err.message });
     }
@@ -52,7 +58,14 @@ class BaseController {
       const { id } = req.params;
       const _id =  new mongoose.Types.ObjectId(id);
       const updatedItem = await this.model.findByIdAndUpdate(_id, req.body, { new: true });
-      res.status(201).json(updatedItem);
+      if (this.populateTable != '') {
+        const items = await this.model.find().populate(this.populateTable);
+        res.status(200).json(items);
+      }else{
+        const items = await this.model.find();
+        res.status(200).json(items);
+      }
+      
     } catch (err) {
         res.status(404).send({message: err.message});
     }
@@ -63,7 +76,13 @@ class BaseController {
       const { id } = req.params;
       const _id = new mongoose.Types.ObjectId(id);
       const deletedItem = await this.model.findByIdAndDelete(_id);
-      res.status(200).json(deletedItem);
+      if (this.populateTable != '') {
+        const items = await this.model.find().populate(this.populateTable);
+        res.status(200).json(items);
+      }else{
+        const items = await this.model.find();
+        res.status(200).json(items);
+      }
 
     } catch (err) {
       res.status(404).send({message: err.message});
