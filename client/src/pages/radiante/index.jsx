@@ -108,12 +108,12 @@ const Form = () => {
               <Card
                 key={id}
                 id = {temRadiant._id}
-                setRadiante={setFood}
+                setRadiante={setRadiante}
                 nombre={temRadiant.nombre}
-                orden={temRadiant.restaurante.nombre}
+                orden={temRadiant.orden.nombre}
                 descripcion={temRadiant.descripcion}
                 urlRadiante={temRadiant.imageUrl}
-                ordenes={restaurants}
+                ordenes={orden}
               />
             )) 
             : loading 
