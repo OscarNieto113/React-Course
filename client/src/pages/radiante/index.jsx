@@ -1,39 +1,41 @@
 import React, { useEffect, useState } from "react";
-//import Card from "../../components/Card";
+import Card from "../../components/Card";
 import { useForm, FormProvider } from "react-hook-form";
-//import Button  from "../../components/Button"
+import Button  from "../../components/Button"
 import InputForm from '../../components/InputForm'
-//import Select from '../../components/Select'
-//import TextArea from '../../components/TextArea'
-//import Navbar from '../../components/Navbar'
-import { createOrden, findAllOrden } from '../../queries/restauranteQueries.js';
-import { createRadiante, findAllRadiante } from '../../queries/platilloQueries.js';
+import Select from '../../components/Select'
+import TextArea from '../../components/TextArea'
+import Navbar from '../../components/Navbar'
+import { createOrden, findAllOrden } from '../../../queries/ordenQueries';
+import { createRadiante, findAllRadiante } from '../../../queries/radianteQueries';
 
 const Form = () => {
-  const [food, setFood] = useState([]);
-  const [restaurants, setRestaurants] = useState([{ nombre: "" }]);
+  const [radiante, setRadiante] = useState([]);
+  const [orden, setOrden] = useState([{ nombre: "" }]);
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getPlatillos().then((res) => {
-      setFood(res);
+    findAllRadiante().then((res) => {
+      setRadiante(res);
+      setLoading(false)
     })
-    getRestaurantes().then((res) => {
-      setRestaurants(res)
+    findAllOrden().then((res) => {
+      setOrden(res)
     })
   }, []);
 
   const methods = useForm();
   const reset = methods.reset
 
-  const onSubmitPlatillo = async (data) => {
-    const response = await postPlatillo(data)
-    setFood(response)
+  const onSubmitRadiante = async (data) => {
+    const response = await createRadiante(data)
+    setRadiante(response)
     reset()
   }
 
-  const onSubmitRestaurante = async (data) => {
-    const response = await postRestaurante(data)    
-    setRestaurants(response)
+  const onSubmitOrden = async (data) => {
+    const response = await createOrden(data)    
+    setOrden(response)
     reset()
   }
 
@@ -42,34 +44,34 @@ const Form = () => {
     <Navbar/>
       {/* Formulario platillos */}
       <div className="md:col-span-1 col-span-2 w-full h-full p-12 ">
-        <h1 className="text-2xl font-bold mb-3">Formulario Platillos</h1>
+        <h1 className="text-2xl font-bold mb-3">Formulario Radiante</h1>
         <FormProvider {...methods}>
           <form
             className="flex flex-col gap-6"
-            onSubmit={methods.handleSubmit(onSubmitPlatillo)}
+            onSubmit={methods.handleSubmit(onSubmitRadiante)}
           >
             <InputForm
               type="text"
-              name="nameComida"
-              label="Platillo"
-              placeholder="Hamburguesa"
+              name="nombre"
+              label="Radiante"
+              placeholder="Kaladin"
               defaultValue=""
             />
             <TextArea
-              name="description"
+              name="descripcion"
               label="Descripcion"
-              placeholder="Una deliciosa Hamburguesa"
+              placeholder="Un radiante con depresion"
               defaultValue=""
             />
             <Select
-              name="nameRestaurante"
-              options={restaurants}
-              label="Restaurante"
-              defaultValue={restaurants[0].nombre}
+              name="orden"
+              options={orden}
+              label="Orden"
+              defaultValue={orden[0].nombre}
             />
             <InputForm
               type="file"
-              name="urlImg"
+              name="urlRadiante"
               label="Imagen"
             />
             <Button type="submit" text="AGREGAR" />
@@ -79,27 +81,47 @@ const Form = () => {
 
       {/* Formulario Restaurantes */}
       <div className="md:col-span-1 col-span-2 w-full h-full p-12">
-        <h1 className="text-2xl font-bold mb-3">Formulario Restaurantes</h1>
+        <h1 className="text-2xl font-bold mb-3">Formulario Orden</h1>
 
         <FormProvider {...methods}>
           <form
             className="flex flex-col gap-6"
-            onSubmit={methods.handleSubmit(onSubmitRestaurante)}
+            onSubmit={methods.handleSubmit(onSubmitOrden)}
           >
             <InputForm
               defaultValue=""
               type="text"
-              name="nameNewRestaurante"
-              label="Restaurante"
-              placeholder="Mc Donald's"
+              name="nombre"
+              label="Orden"
+              placeholder="Truthwatchers"
             />
             <Button type="submit" text="AGREGAR" />
           </form>
         </FormProvider>
       </div>
 
-      {/* Catálogo Radiantezzz */}
-
+      {/* Catálogo Radiante */}
+      <div className="w-full h-full col-span-2 px-12 pb-10">
+        <div className="grid grid-cols-3 gap-10">
+          {radiante && radiante.length > 0 
+            ? radiante.map((temRadiant, id) => (
+              <Card
+                key={id}
+                id = {temRadiant._id}
+                setRadiante={setFood}
+                nombre={temRadiant.nombre}
+                orden={temRadiant.restaurante.nombre}
+                descripcion={temRadiant.descripcion}
+                urlRadiante={temRadiant.imageUrl}
+                ordenes={restaurants}
+              />
+            )) 
+            : loading 
+            ? (<h1 className='font-bold text-3xl col-span-3'>Cargando...</h1>)
+            : (<h1 className='font-bold text-3xl col-span-3'>No hay Radiantes</h1>)
+          }
+        </div>
+      </div>
     </div>
   );
 };

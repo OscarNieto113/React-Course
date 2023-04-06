@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Form from "./pages/Form"
-import DishRestaurant from "./pages/DishRestaurant";
+import Radiante from "./pages/radiante/index";
+//import Orden from "./pages/orden";
 import Layout from "./components/Layout";
 
 
@@ -28,8 +28,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={ <Layout /> }>
-            <Route path="/" element={ <Form /> } />
-            <Route path="/ListOrden" element={ <ListOrden /> } />
+            <Route path="/" element={ <Radiante /> } />
+
           </Route>
         </Routes>
       </BrowserRouter>

@@ -1,6 +1,6 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from '../components/Modal'
-import { deleteByIdRadiante } from "../queries/radianteQueries";
+import { deleteByIdRadiante } from "../../queries/radianteQueries";
 
 const Card = ({setRadiante, id, nombre, orden, descripcion, urlRadiante, ordenes }) => {
   const baseURL = import.meta.env.VITE_BASEURL
