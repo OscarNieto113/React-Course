@@ -71,7 +71,7 @@ const Form = () => {
             />
             <InputForm
               type="file"
-              name="urlRadiante"
+              name="urlImg"
               label="Imagen"
             />
             <Button type="submit" text="AGREGAR" />
@@ -79,7 +79,7 @@ const Form = () => {
         </FormProvider>
       </div>
 
-      {/* Formulario Restaurantes */}
+      {/* Formulario Orden */}
       <div className="md:col-span-1 col-span-2 w-full h-full p-12">
         <h1 className="text-2xl font-bold mb-3">Formulario Orden</h1>
 

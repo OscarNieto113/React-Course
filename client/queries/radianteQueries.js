@@ -3,17 +3,17 @@ import axios from "axios"
 const baseURL = import.meta.env.VITE_BASEURL
 
 export const createRadiante = async (data) => {
-  const { nombreRadiante, descripcionRadiante, nombreOrden, urlImg } = data //"Name" de html
+  const { nombre, descripcion, orden, urlRadiante } = data //"Name" de html
   
   /* Para subir archivos es necesario hacer la consulta de axios como está abajo y transformar
   los datos como está abajo con FormData */
 
   const formData = new FormData();
 
-  formData.append('nombreRadiante', nombreRadiante)
-  formData.append('descripcionRadiante', descripcionRadiante)
-  formData.append('nombreOrden', nombreOrden)
-  formData.append('urlImg', urlImg[0])
+  formData.append('nombre', nombre)
+  formData.append('descripcion', descripcion)
+  formData.append('orden', orden)
+  formData.append('urlRadiante', urlRadiante[0])
 
   try {
     const response = await axios({
@@ -49,15 +49,15 @@ export const deleteByIdRadiante = async (id) => {
   }
 }
 
-export const updateByIdRadiante = async (data, idPlatillo) => {
-  const { updateNombreRadiante, updateDescripcionRadiante, updateNombreOrden, updateUrlImg} = data
+export const updateByIdRadiante = async (data, idRadiante) => {
+  const { nombre, descripcion, orden, urlRadiante} = data
   
   const formData = new FormData();
 
-  formData.append('updateNombreRadiante', updateNombreRadiante)
-  formData.append('updateDescripcionRadiante', updateDescripcionRadiante)
-  formData.append('updateNombreOrden', updateNombreOrden)
-  formData.append('updateUrlImg', updateUrlImg[0])
+  formData.append('nombre', nombre)
+  formData.append('descripcion', descripcion)
+  formData.append('orden', orden)
+  formData.append('urlRadiante', urlRadiante[0])
 
   try {
     const response = await axios({
