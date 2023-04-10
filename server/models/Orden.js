@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const OrderSchema = new mongoose.Schema(
   {
-    nombre: {
+    nombreOrden: {
       type: String,
     }
   }

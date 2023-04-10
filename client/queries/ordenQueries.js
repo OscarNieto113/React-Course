@@ -3,11 +3,11 @@ import axios from "axios"
 const baseURL = import.meta.env.VITE_BASEURL
 
 export const createOrden = async (data) => {
-  const { nombre } = data
+  const { nombreOrden } = data
 
   try {
     const response = await axios.post(`${baseURL}/orden/postOrden`, {
-      nombre
+      nombreOrden
     })
 
     return response.data

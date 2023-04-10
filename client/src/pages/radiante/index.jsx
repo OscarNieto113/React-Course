@@ -67,7 +67,8 @@ const Form = () => {
               name="orden"
               options={orden}
               label="Orden"
-              defaultValue={orden[0].nombre}
+              defaultValue={orden[0].nombreOrden}
+              isForm={true}
             />
             <InputForm
               type="file"
@@ -91,8 +92,8 @@ const Form = () => {
             <InputForm
               defaultValue=""
               type="text"
-              name="nombre"
-              label="Orden"
+              name="nombreOrden"
+              label="nombreOrden"
               placeholder="Truthwatchers"
             />
             <Button type="submit" text="AGREGAR" />

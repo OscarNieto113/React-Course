@@ -7,20 +7,37 @@ class BaseController {
 
   }
 
-  async create(req, res) {
-    try {
-      const item = await this.model.create(req.body);
-      if (this.populateTable != '') {
-        const items = await this.model.find().populate(this.populateTable);
-        res.status(200).json(items);
-      }else{
-        const items = await this.model.find();
-        res.status(200).json(items);
-      }
-    } catch (err) {
-        res.status(404).send({ message: err.message });
+    async create (req, res) {
+        try {
+           
+            if(req.file){
+                const urlImg = req.file.filename;
+                const newBody = {...req.body, urlImg}
+                const item = await this.model.create(newBody);
+                if (this.populateTable != '') {
+                  const items = await this.model.find().populate(this.populateTable);
+                  res.status(200).json(items);
+                }else{
+                  const items = await this.model.find();
+                  res.status(200).json(items);
+                }
+            }else{
+                console.log(req.body)
+                const item = await this.model.create(req.body);
+                if (this.populateTable != '') {
+                  const items = await this.model.find().populate(this.populateTable);
+                  res.status(200).json(items);
+                }else{
+                  const items = await this.model.find();
+                  res.status(200).json(items);
+                }
+            }
+
+        }
+        catch (err) {
+            res.status(404).send({ message: err.message });
+        }
     }
-  }
 
   async findById(req, res) {
     try {

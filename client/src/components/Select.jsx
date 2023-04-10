@@ -23,7 +23,6 @@ const Select = ({ label, name, options, placeholder, defaultValue, isForm, onCha
           className="p-2 rounded-md shadow-md ring-1 ring-gray-200 w-full px-3"
           id={name}
           placeholder={placeholder}
-          data-te-select-init data-te-select-clear-button="true"
         >
           {options.map((option, id) => (
             <option key={id} value={option.nombre}>
@@ -45,7 +44,6 @@ const Select = ({ label, name, options, placeholder, defaultValue, isForm, onCha
         className="p-2 rounded-md shadow-md ring-1 ring-gray-200 w-full px-3"
         id={name}
         placeholder={placeholder}
-        data-te-select-init data-te-select-clear-button="true"
         onChange={onChangeHandler}
       > 
         <option value={1}> Todos </option>

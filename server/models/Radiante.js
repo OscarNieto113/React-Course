@@ -8,7 +8,7 @@ const RadiantSchema = new mongoose.Schema(
     descripcion: {
       type: String
     },
-    urlRadiante: {
+    urlImg: {
       type: String
     },
     orden: {
