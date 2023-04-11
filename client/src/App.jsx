@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Radiante from "./pages/radiante/index";
-//import Orden from "./pages/orden";
+import Radiante from "./pages/radiante/index.jsx";
+import ListOrden from "./pages/orden/index.jsx";
 import Layout from "./components/Layout";
 
 
@@ -29,7 +29,7 @@ function App() {
         <Routes>
           <Route element={ <Layout /> }>
             <Route path="/" element={ <Radiante /> } />
-
+            <Route path="/ListOrden" element={ <ListOrden /> } />
           </Route>
         </Routes>
       </BrowserRouter>
